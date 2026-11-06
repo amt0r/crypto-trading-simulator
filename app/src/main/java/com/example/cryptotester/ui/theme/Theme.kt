@@ -1,10 +1,13 @@
 package com.example.cryptotester.ui.theme
 
+import android.os.Build
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 
-private val DarkColorScheme = darkColorScheme(
+private val DefaultDarkColorScheme = darkColorScheme(
     primary = AccentBlue,
     onPrimary = DarkBackground,
     primaryContainer = AccentBlue.copy(alpha = 0.15f),
@@ -29,10 +32,23 @@ private val DarkColorScheme = darkColorScheme(
 
 @Composable
 fun CryptoTesterTheme(
+    dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
+    val context = LocalContext.current
+    val colorScheme = if (dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        val dynamic = dynamicDarkColorScheme(context)
+        dynamic.copy(
+            background = DarkBackground,
+            surface = DarkSurface,
+            surfaceVariant = DarkSurfaceVariant
+        )
+    } else {
+        DefaultDarkColorScheme
+    }
+
     MaterialTheme(
-        colorScheme = DarkColorScheme,
+        colorScheme = colorScheme,
         typography = Typography,
         content = content
     )

@@ -24,11 +24,12 @@ class SessionManager @Inject constructor(
         val thirtyDaysMs = 30L * 24 * 60 * 60 * 1000
         val latestStart = maxTime - thirtyDaysMs
 
-        val startTimestamp = if (latestStart > minTime) {
+        val rawStart = if (latestStart > minTime) {
             Random.nextLong(minTime, latestStart)
         } else {
             minTime
         }
+        val startTimestamp = (rawStart / (15 * 60 * 1000L)) * (15 * 60 * 1000L)
 
         val sessionMultiplier = Random.nextDouble(0.1, 10.0)
 

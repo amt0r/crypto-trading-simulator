@@ -15,4 +15,7 @@ interface SimulationResultDao {
 
     @Query("SELECT * FROM simulation_results ORDER BY timestamp DESC")
     fun getAll(): Flow<List<SimulationResultEntity>>
+
+    @Query("DELETE FROM simulation_results")
+    suspend fun deleteAll()
 }

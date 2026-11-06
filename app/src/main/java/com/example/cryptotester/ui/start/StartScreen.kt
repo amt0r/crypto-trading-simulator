@@ -7,7 +7,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,9 +15,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBars
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -34,14 +31,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.cryptotester.ui.theme.AccentBlue
 import com.example.cryptotester.ui.theme.CryptoGreen
 import com.example.cryptotester.ui.theme.DarkBackground
 import com.example.cryptotester.ui.theme.DarkCard
@@ -56,6 +52,7 @@ fun StartScreen(
     viewModel: StartViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val primaryColor = MaterialTheme.colorScheme.primary
 
     LaunchedEffect(uiState.navigateToSimulator) {
         if (uiState.navigateToSimulator) {
@@ -88,7 +85,7 @@ fun StartScreen(
             Text(
                 text = "TRADING SIMULATOR",
                 style = MaterialTheme.typography.titleMedium,
-                color = AccentBlue,
+                color = primaryColor,
                 fontWeight = FontWeight.SemiBold,
                 letterSpacing = 4.sp,
                 textAlign = TextAlign.Center
@@ -100,7 +97,6 @@ fun StartScreen(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clip(RoundedCornerShape(16.dp))
                     .background(DarkCard)
                     .padding(24.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -130,11 +126,11 @@ fun StartScreen(
                     },
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
-                    shape = RoundedCornerShape(12.dp),
+                    shape = RectangleShape,
                     colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = AccentBlue,
+                        focusedBorderColor = primaryColor,
                         unfocusedBorderColor = DarkSurfaceVariant,
-                        cursorColor = AccentBlue
+                        cursorColor = primaryColor
                     )
                 )
 
@@ -155,13 +151,13 @@ fun StartScreen(
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            // Start button
+            // Start button - rectangular shape
             Button(
                 onClick = viewModel::onStartSimulation,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(56.dp),
-                shape = RoundedCornerShape(16.dp),
+                    .height(54.dp),
+                shape = RectangleShape,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = CryptoGreen,
                     contentColor = DarkBackground
@@ -185,15 +181,15 @@ fun StartScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Stats button
+            // Stats button - rectangular shape
             OutlinedButton(
                 onClick = onNavigateToStats,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(56.dp),
-                shape = RoundedCornerShape(16.dp),
+                    .height(54.dp),
+                shape = RectangleShape,
                 colors = ButtonDefaults.outlinedButtonColors(
-                    contentColor = AccentBlue
+                    contentColor = primaryColor
                 )
             ) {
                 Text(

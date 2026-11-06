@@ -18,5 +18,11 @@ interface CandleRepository {
         upToTimestamp: Long
     ): Candle?
 
+    suspend fun getCandles15mBetween(
+        symbol: CryptoSymbol,
+        fromTimestamp: Long,
+        toTimestamp: Long
+    ): List<Candle>
+
     suspend fun getTimeRange(): Pair<Long, Long>
 }

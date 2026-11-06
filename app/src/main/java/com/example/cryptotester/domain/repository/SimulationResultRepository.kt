@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.Flow
 interface SimulationResultRepository {
     suspend fun saveResult(result: SimulationResult)
     fun getAllResults(): Flow<List<SimulationResult>>
+    suspend fun clearAllResults()
 }

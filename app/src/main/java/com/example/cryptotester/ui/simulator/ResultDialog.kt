@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
@@ -17,14 +16,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.example.cryptotester.domain.model.SimulationResult
-import com.example.cryptotester.ui.theme.AccentBlue
 import com.example.cryptotester.ui.theme.CryptoGreen
 import com.example.cryptotester.ui.theme.CryptoRed
 import com.example.cryptotester.ui.theme.DarkBackground
@@ -43,6 +41,7 @@ fun ResultDialog(
 ) {
     val isProfit = result.pnlPercent >= 0
     val dateFormat = SimpleDateFormat("MMM dd, yyyy", Locale.US)
+    val primaryColor = MaterialTheme.colorScheme.primary
 
     Dialog(
         onDismissRequest = onDismiss,
@@ -51,14 +50,12 @@ fun ResultDialog(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .clip(RoundedCornerShape(24.dp))
                 .background(DarkCard)
                 .padding(28.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Emoji header
             Text(
-                text = if (isProfit) "📈" else "📉",
+                text = if (isProfit) "🚀" else "📉",
                 style = MaterialTheme.typography.headlineLarge,
                 modifier = Modifier.size(48.dp),
                 textAlign = TextAlign.Center
@@ -89,7 +86,6 @@ fun ResultDialog(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clip(RoundedCornerShape(12.dp))
                     .background(DarkSurfaceVariant)
                     .padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
@@ -112,9 +108,9 @@ fun ResultDialog(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(52.dp),
-                shape = RoundedCornerShape(14.dp),
+                shape = RectangleShape,
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = AccentBlue,
+                    containerColor = primaryColor,
                     contentColor = DarkBackground
                 )
             ) {

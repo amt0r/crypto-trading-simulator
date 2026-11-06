@@ -21,6 +21,10 @@ class SimulationTimeManager @Inject constructor() {
         _currentTime.value += timeframe.durationMs
     }
 
+    fun advance(durationMs: Long) {
+        _currentTime.value += durationMs
+    }
+
     fun hasReachedEnd(maxTimestamp: Long): Boolean {
         return _currentTime.value >= maxTimestamp
     }

@@ -22,4 +22,8 @@ class SimulationResultRepositoryImpl @Inject constructor(
     override fun getAllResults(): Flow<List<SimulationResult>> {
         return dao.getAll().map { entities -> entities.map { it.toDomain() } }
     }
+
+    override suspend fun clearAllResults() {
+        dao.deleteAll()
+    }
 }
